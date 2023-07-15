@@ -1,6 +1,3 @@
-import { config } from "dotenv";
-config();
-
 import PostModel from "../models/Posts.js";
 
 import {
@@ -68,6 +65,10 @@ const mutation = new GraphQLObjectType({
         updatedAt: { type: GraphQLString },
       },
       resolve(parent, args) {
+        if (!context.user) {
+          throw new Error("Denied!");
+        }
+
         const post = new PostModel({
           title: args.title,
           content: args.content,
@@ -84,6 +85,10 @@ const mutation = new GraphQLObjectType({
         id: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
+        if (!context.user) {
+          throw new Error("You cannot delete a post that is not yours!");
+        }
+
         return PostModel.findByIdAndRemove(args.id);
       },
     },
