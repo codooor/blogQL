@@ -64,7 +64,7 @@ const mutation = new GraphQLObjectType({
         createdAt: { type: GraphQLString },
         updatedAt: { type: GraphQLString },
       },
-      resolve(parent, args) {
+      resolve(parent, args, context) {
         if (!context.user) {
           throw new Error("Denied!");
         }
@@ -84,7 +84,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
       },
-      resolve(parent, args) {
+      resolve(parent, args, context) {
         if (!context.user) {
           throw new Error("You cannot delete a post that is not yours!");
         }
