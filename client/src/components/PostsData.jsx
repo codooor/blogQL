@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_POSTS } from "../queries/postQueries";
 import DeletePostButton from "./DeletePostButton";
+import ReadMore from "./ReadMore";
 import { marked } from "marked";
 
 export default function PostsData() {
@@ -24,8 +25,7 @@ export default function PostsData() {
                 <h6 className="text-center">{post.title}</h6>
                 <hr className="m-0" />
 
-                <div dangerouslySetInnerHTML={renderMarkdown(post.content)} />
-
+                <ReadMore>{post.content}</ReadMore>
                 <DeletePostButton
                   type="button"
                   className="btn btn-outline-danger btn-sm "
