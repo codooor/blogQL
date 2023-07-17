@@ -6,7 +6,9 @@
 
 - [x] create login for admin role
 - [ ] logout button 
-- [ ] when admin creates post it generates to the Posts page
+- [ ] move posting features (add, delete, edit ) to /profile page
+- [ ] when admin creates, deletes, edits post -- render to the /posts page
+- [ ] create some sort of landing page ( I think ) 
 - [ ] idea generator 
 
 
