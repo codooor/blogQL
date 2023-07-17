@@ -11,6 +11,22 @@ import {
 
 // Queries
 
+const AdminType = new GraphQLObjectType({
+  name: "Admin",
+  fields: () => ({
+    id: { type: GraphQLID },
+    username: { type: GraphQLNonNull(GraphQLString) },
+  }),
+});
+
+const LoginType = new GraphQLObjectType({
+  name: "Login",
+  fields: () => ({
+    token: { type: GraphQLNonNull(GraphQLString) },
+    admin: { type: GraphQLNonNull(AdminType) },
+  }),
+});
+
 const PostType = new GraphQLObjectType({
   name: "Post",
   fields: () => ({
@@ -55,6 +71,26 @@ const RootQuery = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    login: {
+      type: LoginType,
+      args: {
+        username: { type: GraphQLNonNull(GraphQLString) },
+        password: { type: GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(parent, { username, password }) {
+        const admin = await verifyAdminCredentials(username, password);
+
+        if (!admin) {
+          throw new Error("Invalid credentials!");
+        }
+
+        const token = jwt.sign({ admin }, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+
+        return { token, admin };
+      },
+    },
     addPost: {
       type: PostType,
       args: {
