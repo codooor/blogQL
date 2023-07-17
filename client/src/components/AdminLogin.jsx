@@ -1,4 +1,17 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function AdminLogin() {
+  const navigate = useNavigate();
+  const [formState, setFormState] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
+    console.log(`Adming attempting login with ${formState.username} `);
+  };
+
   return (
     <div className="d-flex flex-column justify-content-center align-items-center m-4">
       <form action="submit">
@@ -6,6 +19,10 @@ export default function AdminLogin() {
           <legend>Admin Login</legend>
           <div className="form-group">
             <input
+              value={formState.username}
+              onChange={(e) =>
+                setFormState({ ...formState, username: e.target.value })
+              }
               type="text"
               name="username"
               placeholder="Username"
@@ -14,6 +31,10 @@ export default function AdminLogin() {
           </div>
           <div className="form-group">
             <input
+              value={formState.password}
+              onChange={(e) =>
+                setFormState({ ...formState, password: e.target.value })
+              }
               type="password"
               name="password"
               placeholder="Password"
