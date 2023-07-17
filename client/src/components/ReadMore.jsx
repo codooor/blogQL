@@ -10,7 +10,7 @@ function ReadMore({ children }) {
   };
 
   return (
-    <div className="text">
+    <div>
       {isReadMore ? (
         <ReactMarkdown>{markdownContent.slice(0, 150)}</ReactMarkdown>
       ) : (
