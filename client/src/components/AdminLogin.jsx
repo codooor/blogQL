@@ -42,7 +42,9 @@ export default function AdminLogin() {
             />
           </div>
           <div className="text-center">
-            <button className="btn btn-primary">Access Page</button>
+            <button className="btn btn-primary" onClick={handleSubmit}>
+              Access
+            </button>
           </div>
         </fieldset>
       </form>

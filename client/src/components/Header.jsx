@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AUTH_TOKEN } from "./constants.js";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const authToken = localStorage.getItem(AUTH_TOKEN);
+
   return (
     <>
       <nav
@@ -8,7 +12,7 @@ export default function Header() {
         style={{ backgroundColor: "gray" }}
       >
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
+          <Link to="/profile" className="navbar-brand">
             BlogQL
           </Link>
           <button
@@ -34,6 +38,27 @@ export default function Header() {
                   Posts
                 </Link>
               </li>
+              {authToken ? (
+                <li className="nav-item">
+                  <a
+                    className="nav-link"
+                    href="/"
+                    onClick={() => {
+                      localStorage.removeItem(AUTH_TOKEN);
+                      navigate("/");
+                    }}
+                  >
+                    {" "}
+                    Logout{" "}
+                  </a>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link to="/login" className="nav-link">
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
