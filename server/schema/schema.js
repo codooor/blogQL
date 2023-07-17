@@ -84,7 +84,7 @@ const mutation = new GraphQLObjectType({
           throw new Error("Invalid credentials!");
         }
 
-        const token = jwt.sign({ admin }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ sub: username }, process.env.JWT_SECRET, {
           expiresIn: "1h",
         });
 
