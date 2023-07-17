@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Posts from "./pages/Posts";
 import Profile from "./pages/Profile";
+import Login from "./pages/Login";
 import { AUTH_TOKEN } from "./components/constants.js";
 
 const cache = new InMemoryCache({
@@ -54,6 +55,7 @@ function App() {
             <Routes>
               <Route path="/profile" element={<Profile />} />
               <Route path="/posts" element={<Posts />} />
+              <Route path="/" element={<Login />} />
             </Routes>
           </div>
         </Router>

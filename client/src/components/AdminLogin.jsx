@@ -9,7 +9,10 @@ export default function AdminLogin() {
   });
 
   const handleSubmit = (e) => {
-    console.log(`Adming attempting login with ${formState.username} `);
+    e.preventDefault();
+    console.log(`Admin attempting login with ${formState.username} `);
+
+    navigate("/profile");
   };
 
   return (

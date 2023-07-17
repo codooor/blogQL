@@ -54,7 +54,7 @@ export default function Header() {
                 </li>
               ) : (
                 <li className="nav-item">
-                  <Link to="/login" className="nav-link">
+                  <Link to="/profile" className="nav-link">
                     Login
                   </Link>
                 </li>
