@@ -2,6 +2,14 @@
 
 - A foray into creating a website using **`React.js`**, **`MongoDB`**, **`Express`**, **`GraphQL`**, **`Node`**, etc.
 
+## Current Issues / Features 
+
+- [x] create login for admin role
+- [ ] logout button 
+- [ ] when admin creates post it generates to the Posts page
+- [ ] idea generator 
+
+
 ## Available Scripts
 
 In the project directory, you can run:
