@@ -1,4 +1,5 @@
 import express from "express";
+import { ApolloServer } from "apollo-server-express";
 import { config } from "dotenv";
 import { graphqlHTTP } from "express-graphql";
 import cors from "cors";
@@ -66,6 +67,21 @@ app.use((req, res, next) => {
     res.locals.user = payload.sub;
     next();
   });
+});
+
+//create instance of ApolloServer
+
+const server = new ApolloServer({
+  schema,
+  context: ({ req }) => {
+    const token = req.headers.authorization || "";
+    try {
+      const user = jwt.verify(token, process.env.SECRET);
+      return { user };
+    } catch (error) {
+      return {};
+    }
+  },
 });
 
 // Error handling middleware
