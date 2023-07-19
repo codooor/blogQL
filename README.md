@@ -5,7 +5,8 @@
 ## Current Issues / Features 
 
 **MAJOR ISSUE** 
-- TOKEN not created or storing as cookie to frontend. Successfull on the backend.
+- TOKEN not created or storing as cookie to frontend. Successfull on the backend
+---
 
 - [x] create login for admin role
 - [x] logout button 
