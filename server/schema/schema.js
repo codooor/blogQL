@@ -1,5 +1,7 @@
 import PostModel from "../models/Posts.js";
 import { verifyAdminCredentials } from "../utils/adminHelpers.js";
+import pkg from "jsonwebtoken";
+const { sign } = pkg;
 
 import {
   GraphQLObjectType,
@@ -85,7 +87,7 @@ const mutation = new GraphQLObjectType({
           throw new Error("Invalid credentials!");
         }
 
-        const token = jwt.sign({ sub: username }, process.env.JWT_SECRET, {
+        const token = sign({ sub: username }, process.env.SECRET, {
           expiresIn: "1h",
         });
 

@@ -3,8 +3,10 @@ import { ApolloServer } from "apollo-server-express";
 import { config } from "dotenv";
 import { graphqlHTTP } from "express-graphql";
 import cors from "cors";
+import pkg from "jsonwebtoken";
+const { sign, verify } = pkg;
+
 import connectDB from "./config/db.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import colors from "colors";
 import schema from "./schema/schema.js";
@@ -41,7 +43,7 @@ app.post("/profile", async (req, res) => {
   const passwordMatches = await bcrypt.compare(password, hashedPASSWORD);
 
   if (username === process.env.USER_NAME && passwordMatches) {
-    const token = jwt.sign({ sub: username }, process.env.SECRET, {
+    const token = sign({ sub: username }, process.env.SECRET, {
       expiresIn: "1h",
     });
 
@@ -60,7 +62,7 @@ app.use((req, res, next) => {
   const authHeader = req.headers.authorization;
   const bearerToken = authHeader.split(" ");
   const token = bearerToken[1];
-  jwt.verify(token, process.env.SECRET, (err, payload) => {
+  verify(token, process.env.SECRET, (err, payload) => {
     if (err) {
       return res.status(401).json({ message: "Invalid token" });
     }
@@ -76,7 +78,7 @@ const server = new ApolloServer({
   context: ({ req }) => {
     const token = req.headers.authorization || "";
     try {
-      const user = jwt.verify(token, process.env.SECRET);
+      const user = verify(token, process.env.SECRET);
       return { user };
     } catch (error) {
       return {};
