@@ -5,7 +5,7 @@
 ## Current Issues / Future Features / Hurdles
 
 #### **MAJOR ISSUES** 
- - ~~TOKEN not created or storing as cookie to frontend. Successfull on the backend~~
+ - ~~TOKEN not created storing with onClick. Successfull on the backend~~
 
  ---
 
