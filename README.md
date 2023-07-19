@@ -2,22 +2,23 @@
 
 - A foray into creating a website using **`React.js`**, **`MongoDB`**, **`Express`**, **`GraphQL`**, **`Node`**, etc.
 
-## Current Issues / Future Features / Hurdles
+### Current Issues / Future Features / Hurdles
 
-#### **MAJOR ISSUES** 
- - ~~TOKEN not created storing with onClick. Successful on the backend~~
- - When admin is logged in succesfully CRUD operations are still locked
+#### **CURRENT ISSUES** 
+---
+- ~~TOKEN not created storing with onClick. Successful on the backend~~
+- When admin is logged in succesfully CRUD operations are still locked
 
- ---
+ 
 
-#### **Hurdles**
-
+#### **HURDLES**
+---
 - Decide trade-off between HttpOnly cookies and localStorage before deployment (need refactoring if HttpOnly )
 
+
+
+#### **FUTURE FEATURE TODOS**
 ---
-
-#### Future Feature Todos
-
 - [x] create login for admin role
 - [x] logout button 
 - [ ] move posting features (add, delete, edit ) to /profile page
