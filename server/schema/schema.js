@@ -99,19 +99,20 @@ const mutation = new GraphQLObjectType({
       args: {
         title: { type: GraphQLNonNull(GraphQLString) },
         content: { type: GraphQLNonNull(GraphQLString) },
-        author: { type: GraphQLNonNull(GraphQLString) },
+
         createdAt: { type: GraphQLString },
         updatedAt: { type: GraphQLString },
       },
       resolve(parent, args, context) {
-        if (!context.user) {
-          throw new Error("Denied!");
+        if (!context.user.role !== "admin") {
+          console.log(context.user);
+          throw new Error("Denied! You are not an admin!");
         }
 
         const post = new PostModel({
           title: args.title,
           content: args.content,
-          author: { name: args.author || "Unknown Author" },
+          author: { name: context.user.username },
           createdAt: args.createdAt,
           updatedAt: args.updatedAt,
         });

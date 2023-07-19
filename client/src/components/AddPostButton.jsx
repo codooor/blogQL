@@ -7,10 +7,9 @@ import MarkdownEditor from "./MarkdownEditor";
 export default function AddPostButton() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
 
-  const [addPost] = useMutation(ADD_POST, {
-    variables: { title, content, author },
+  const [addPostMutation] = useMutation(ADD_POST, {
+    variables: { author: "admin" },
     update(cache, { data: { addPost } }) {
       const { posts } = cache.readQuery({ query: GET_POSTS });
 
@@ -24,15 +23,14 @@ export default function AddPostButton() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (title === "" || content === "" || author === "") {
+    if (title === "" || content === "") {
       return alert("Please fill in all fields");
     }
 
-    addPost();
+    addPostMutation();
 
     setTitle("");
     setContent("");
-    setAuthor("");
   };
 
   return (
@@ -88,14 +86,14 @@ export default function AddPostButton() {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Author</label>
-                  <input
+                  {/* <label className="form-label">Author</label> */}
+                  {/* <input
                     type="text"
                     className="form-control"
                     id="author"
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
-                  />
+                  /> */}
                 </div>
 
                 <button
