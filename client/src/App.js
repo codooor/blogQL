@@ -10,7 +10,7 @@ import Header from "./components/Header";
 import Posts from "./pages/Posts";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
-import { AUTH_TOKEN } from "./components/constants.js";
+import { AUTH_TOKEN } from "./utils/constants.js";
 
 const cache = new InMemoryCache({
   typePolicies: {
