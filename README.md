@@ -4,8 +4,11 @@
 
 ## Current Issues / Features 
 
+**MAJOR ISSUE** 
+- TOKEN not created or storing as cookie to frontend. Successfull on the backend.
+
 - [x] create login for admin role
-- [ ] logout button 
+- [x] logout button 
 - [ ] move posting features (add, delete, edit ) to /profile page
 - [ ] when admin creates, deletes, edits post -- render to the /posts page
 - [ ] create some sort of landing page ( I think ) 

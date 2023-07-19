@@ -6,6 +6,7 @@ export default function AdminLogout() {
   const logout = () => {
     localStorage.removeItem("token");
 
+    console.log(`Succesfully logged out`);
     navigate("/");
   };
   return (
