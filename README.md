@@ -16,6 +16,8 @@
 
 ---
 
+#### Future Feature Todos
+
 - [x] create login for admin role
 - [x] logout button 
 - [ ] move posting features (add, delete, edit ) to /profile page
