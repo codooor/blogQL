@@ -5,7 +5,8 @@
 ## Current Issues / Future Features / Hurdles
 
 #### **MAJOR ISSUES** 
- - ~~TOKEN not created storing with onClick. Successfull on the backend~~
+ - ~~TOKEN not created storing with onClick. Successful on the backend~~
+ - When admin is logged in succesfully CRUD operations are still locked
 
  ---
 
