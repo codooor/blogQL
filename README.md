@@ -2,10 +2,16 @@
 
 - A foray into creating a website using **`React.js`**, **`MongoDB`**, **`Express`**, **`GraphQL`**, **`Node`**, etc.
 
-## Current Issues / Features 
+## Current Issues / Future Features / Hurdles
 
-**MAJOR ISSUE** 
+#### **MAJOR ISSUES** 
  - ~~TOKEN not created or storing as cookie to frontend. Successfull on the backend~~
+
+ ---
+
+#### **Hurdles**
+
+- Decide trade-off between HttpOnly cookies and localStorage before deployment (need refactoring if HttpOnly )
 
 ---
 
