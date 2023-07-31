@@ -9,12 +9,14 @@
 - ~~TOKEN not created storing with onClick. Successful on the backend~~
 - ~~When admin is logged in succesfully CRUD operations are still locked~~
 - ~~token is created but the signing is not working properly~~
+- logout functionality **UNUSABLE**
 
  
 
 #### **HURDLES**
 ---
 - Decide trade-off between HttpOnly cookies and localStorage before deployment (need refactoring if HttpOnly )
+- learning not to verify express and apollo/server together
 
 
 
