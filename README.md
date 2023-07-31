@@ -7,8 +7,8 @@
 #### **CURRENT ISSUES** 
 ---
 - ~~TOKEN not created storing with onClick. Successful on the backend~~
-- When admin is logged in succesfully CRUD operations are still locked
-- token is created but the signing is not working properly
+- ~~When admin is logged in succesfully CRUD operations are still locked~~
+- ~~token is created but the signing is not working properly~~
 
  
 
@@ -22,8 +22,8 @@
 ---
 - [x] create login for admin role
 - [x] logout button 
-- [ ] move posting features (add, delete, edit ) to /profile page
-- [ ] when admin creates, deletes, edits post -- render to the /posts page
+- [x] move posting features (add, delete, edit ) to /profile page
+- [x] when admin creates, deletes, edits post -- render to the /posts page
 - [ ] create some sort of landing page ( I think ) 
 - [ ] idea generator 
 
@@ -38,6 +38,9 @@ In the project directory, you can run:
 
 - Apollo Server renders the need for grapql-express null (backend and frontend talk with this implementation)
     - I was running express server and apollo server simultaneously causing conflicts 
+
+- It is crucial to run new features through a feature branch.
+    - However, running directly onto my main branch force me to keep moving forward
 
 ### Future of the Blog 
 

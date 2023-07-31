@@ -10,13 +10,13 @@ export default function AdminLogin() {
     username: "",
     password: "",
   });
-  const [adminLogin] = useMutation(ADMIN_LOGIN);
+  const [login] = useMutation(ADMIN_LOGIN);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(`Admin attempting login with ${formState.username} `);
 
-    adminLogin({
+    login({
       variables: {
         username: formState.username,
         password: formState.password,
@@ -36,7 +36,7 @@ export default function AdminLogin() {
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center m-4">
-      <form>
+      <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Admin Login</legend>
           <div className="form-group">
@@ -64,11 +64,7 @@ export default function AdminLogin() {
             />
           </div>
           <div className="text-center">
-            <button
-              className="btn btn-primary"
-              type="submit"
-              onClick={handleSubmit}
-            >
+            <button className="btn btn-primary" type="submit">
               Access
             </button>
           </div>

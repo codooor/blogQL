@@ -11,7 +11,12 @@ export default function AddPostButton() {
   const [addPostMutation] = useMutation(ADD_POST, {
     variables: { title, content },
     update(cache, { data: { addPost } }) {
-      const { posts } = cache.readQuery({ query: GET_POSTS });
+      const data = cache.readQuery({ query: GET_POSTS });
+      let posts = [];
+
+      if (data && data.posts) {
+        posts = data.posts;
+      }
 
       cache.writeQuery({
         query: GET_POSTS,

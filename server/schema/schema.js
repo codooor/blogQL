@@ -55,15 +55,15 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     posts: {
       type: new GraphQLList(PostType),
-      resolve(parent, args) {
-        return PostModel.find();
+      async resolve(parent, args) {
+        return await PostModel.find();
       },
     },
     post: {
       type: PostType,
       args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return PostModel.findById(args.id);
+      async resolve(parent, args) {
+        return await PostModel.findById(args.id);
       },
     },
   },
