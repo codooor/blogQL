@@ -41,12 +41,10 @@ const PostType = new GraphQLObjectType({
         name: "Author",
         fields: () => ({
           id: { type: GraphQLID },
-          name: { type: GraphQLString },
+          username: { type: GraphQLString },
         }),
       }),
     },
-    createdAt: { type: GraphQLString },
-    updatedAt: { type: GraphQLString },
   }),
 });
 
@@ -88,14 +86,14 @@ const mutation = new GraphQLObjectType({
         }
 
         const token = sign(
-          { sub: username, role: "admin" },
+          { sub: admin.id, role: "admin" },
           process.env.SECRET,
           {
             expiresIn: "1h",
           }
         );
 
-        return await { token, admin };
+        return { token, admin };
       },
     },
     addPost: {
@@ -103,9 +101,6 @@ const mutation = new GraphQLObjectType({
       args: {
         title: { type: GraphQLNonNull(GraphQLString) },
         content: { type: GraphQLNonNull(GraphQLString) },
-
-        createdAt: { type: GraphQLString },
-        updatedAt: { type: GraphQLString },
       },
       async resolve(parent, args, context) {
         if (context.user.role !== "admin") {
@@ -117,8 +112,6 @@ const mutation = new GraphQLObjectType({
           title: args.title,
           content: args.content,
           author: { name: context.user.username },
-          createdAt: args.createdAt,
-          updatedAt: args.updatedAt,
         });
         return await post.save();
       },
@@ -128,12 +121,12 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
       },
-      async resolve(parent, args, context) {
+      resolve(parent, args, context) {
         if (context.user.role !== "admin") {
           throw new Error("You cannot delete a post that is not yours!");
         }
 
-        return await PostModel.findByIdAndRemove(args.id);
+        return PostModel.findByIdAndRemove(args.id);
       },
     },
   },

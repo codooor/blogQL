@@ -10,6 +10,7 @@
 - ~~When admin is logged in succesfully CRUD operations are still locked~~
 - ~~token is created but the signing is not working properly~~
 - logout functionality **UNUSABLE**
+- entire login function is **UNUSABLE**
 
  
 
