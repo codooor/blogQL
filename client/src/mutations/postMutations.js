@@ -1,12 +1,8 @@
 import { gql } from "@apollo/client";
 
 const ADD_POST = gql`
-  mutation addPostMutation(
-    $title: String!
-    $content: String!
-    $author: String!
-  ) {
-    addPost(title: $title, content: $content, author: $author) {
+  mutation addPostMutation($title: String!, $content: String!) {
+    addPost(title: $title, content: $content) {
       id
       title
       content

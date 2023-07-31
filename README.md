@@ -8,6 +8,7 @@
 ---
 - ~~TOKEN not created storing with onClick. Successful on the backend~~
 - When admin is logged in succesfully CRUD operations are still locked
+- token is created but the signing is not working properly
 
  
 
@@ -35,7 +36,8 @@ In the project directory, you can run:
 
 ### What I've learned
 
-- security is a feature not a bug
+- Apollo Server renders the need for grapql-express null (backend and frontend talk with this implementation)
+    - I was running express server and apollo server simultaneously causing conflicts 
 
 ### Future of the Blog 
 

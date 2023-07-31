@@ -87,9 +87,13 @@ const mutation = new GraphQLObjectType({
           throw new Error("Invalid credentials!");
         }
 
-        const token = sign({ sub: username }, process.env.SECRET, {
-          expiresIn: "1h",
-        });
+        const token = sign(
+          { sub: username, role: "admin" },
+          process.env.SECRET,
+          {
+            expiresIn: "1h",
+          }
+        );
 
         return { token, admin };
       },
@@ -104,7 +108,7 @@ const mutation = new GraphQLObjectType({
         updatedAt: { type: GraphQLString },
       },
       resolve(parent, args, context) {
-        if (!context.user.role !== "admin") {
+        if (context.user.role !== "admin") {
           console.log(context.user);
           throw new Error("Denied! You are not an admin!");
         }
@@ -125,7 +129,7 @@ const mutation = new GraphQLObjectType({
         id: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args, context) {
-        if (!context.user) {
+        if (context.user.role !== "admin") {
           throw new Error("You cannot delete a post that is not yours!");
         }
 

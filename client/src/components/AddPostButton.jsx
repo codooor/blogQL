@@ -9,7 +9,7 @@ export default function AddPostButton() {
   const [content, setContent] = useState("");
 
   const [addPostMutation] = useMutation(ADD_POST, {
-    variables: { author: "admin" },
+    variables: { title, content },
     update(cache, { data: { addPost } }) {
       const { posts } = cache.readQuery({ query: GET_POSTS });
 
@@ -27,7 +27,7 @@ export default function AddPostButton() {
       return alert("Please fill in all fields");
     }
 
-    addPostMutation();
+    addPostMutation(title, content);
 
     setTitle("");
     setContent("");

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ADMIN_LOGIN } from "../mutations/loginMutation";
 import { useMutation } from "@apollo/client";
+import { AUTH_TOKEN } from "../utils/constants";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ export default function AdminLogin() {
     username: "",
     password: "",
   });
-  const [adminLogin, { data, loading, error }] = useMutation(ADMIN_LOGIN);
+  const [adminLogin] = useMutation(ADMIN_LOGIN);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,9 +24,8 @@ export default function AdminLogin() {
     })
       .then((res) => {
         const token = res.data.login.token;
-        const admin = res.data.login.admin;
 
-        localStorage.setItem("auth-token", token);
+        localStorage.setItem(AUTH_TOKEN, token);
 
         navigate("/profile");
       })
@@ -36,7 +36,7 @@ export default function AdminLogin() {
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center m-4">
-      <form action="submit">
+      <form>
         <fieldset>
           <legend>Admin Login</legend>
           <div className="form-group">
@@ -64,7 +64,11 @@ export default function AdminLogin() {
             />
           </div>
           <div className="text-center">
-            <button className="btn btn-primary" onClick={handleSubmit}>
+            <button
+              className="btn btn-primary"
+              type="submit"
+              onClick={handleSubmit}
+            >
               Access
             </button>
           </div>
