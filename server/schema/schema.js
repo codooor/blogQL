@@ -95,7 +95,7 @@ const mutation = new GraphQLObjectType({
           }
         );
 
-        return { token, admin };
+        return await { token, admin };
       },
     },
     addPost: {
@@ -107,7 +107,7 @@ const mutation = new GraphQLObjectType({
         createdAt: { type: GraphQLString },
         updatedAt: { type: GraphQLString },
       },
-      resolve(parent, args, context) {
+      async resolve(parent, args, context) {
         if (context.user.role !== "admin") {
           console.log(context.user);
           throw new Error("Denied! You are not an admin!");
@@ -120,7 +120,7 @@ const mutation = new GraphQLObjectType({
           createdAt: args.createdAt,
           updatedAt: args.updatedAt,
         });
-        return post.save();
+        return await post.save();
       },
     },
     deletePost: {
@@ -128,12 +128,12 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
       },
-      resolve(parent, args, context) {
+      async resolve(parent, args, context) {
         if (context.user.role !== "admin") {
           throw new Error("You cannot delete a post that is not yours!");
         }
 
-        return PostModel.findByIdAndRemove(args.id);
+        return await PostModel.findByIdAndRemove(args.id);
       },
     },
   },
