@@ -8,7 +8,7 @@ const GET_POSTS = gql`
       content
       author {
         id
-        name
+        username
       }
     }
   }

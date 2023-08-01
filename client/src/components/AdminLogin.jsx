@@ -10,13 +10,17 @@ export default function AdminLogin() {
     username: "",
     password: "",
   });
-  const [login] = useMutation(ADMIN_LOGIN);
+
+  const [adminLogin] = useMutation(ADMIN_LOGIN);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(`event triggered`);
+
     console.log(`Admin attempting login with ${formState.username} `);
 
-    login({
+    adminLogin({
       variables: {
         username: formState.username,
         password: formState.password,
@@ -24,13 +28,13 @@ export default function AdminLogin() {
     })
       .then((res) => {
         const token = res.data.login.token;
+        console.log(`Admin login successful with token ${token}`);
 
         localStorage.setItem(AUTH_TOKEN, token);
-
-        navigate("/profile");
+        navigate("/posts");
       })
-      .catch((err) => {
-        console.error("Error: ", err);
+      .catch((error) => {
+        console.error("Error in admin login mutation:", error);
       });
   };
 
@@ -39,6 +43,7 @@ export default function AdminLogin() {
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Admin Login</legend>
+
           <div className="form-group">
             <input
               value={formState.username}

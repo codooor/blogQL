@@ -121,12 +121,12 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
       },
-      resolve(parent, args, context) {
+      async resolve(parent, args, context) {
         if (context.user.role !== "admin") {
           throw new Error("You cannot delete a post that is not yours!");
         }
 
-        return PostModel.findByIdAndRemove(args.id);
+        return await PostModel.findByIdAndRemove(args.id);
       },
     },
   },
