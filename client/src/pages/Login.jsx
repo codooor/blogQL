@@ -1,9 +1,9 @@
 import AdminLogin from "../components/AdminLogin";
 
-export default function Login() {
+export default function Login({ onLogin }) {
   return (
     <div className="container">
-      <AdminLogin />
+      <AdminLogin onLogin={onLogin} />
     </div>
   );
 }

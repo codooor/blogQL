@@ -4,7 +4,7 @@ import { ADMIN_LOGIN } from "../mutations/loginMutation";
 import { useMutation } from "@apollo/client";
 import { AUTH_TOKEN } from "../utils/constants";
 
-export default function AdminLogin() {
+export default function AdminLogin({ onLogin }) {
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
     username: "",
@@ -29,9 +29,8 @@ export default function AdminLogin() {
       .then((res) => {
         const token = res.data.login.token;
         console.log(`Admin login successful with token ${token}`);
-
         localStorage.setItem(AUTH_TOKEN, token);
-        navigate("/posts");
+        onLogin().then(() => navigate("/profile")); // notice the onLogin here
       })
       .catch((error) => {
         console.error("Error in admin login mutation:", error);

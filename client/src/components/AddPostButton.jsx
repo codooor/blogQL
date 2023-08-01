@@ -23,6 +23,9 @@ export default function AddPostButton() {
         data: { posts: [...posts, addPost] },
       });
     },
+    onError(err) {
+      alert(err.message);
+    },
   });
 
   const onSubmit = (e) => {
@@ -32,7 +35,7 @@ export default function AddPostButton() {
       return alert("Please fill in all fields");
     }
 
-    addPostMutation(title, content);
+    addPostMutation();
 
     setTitle("");
     setContent("");

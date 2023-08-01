@@ -5,13 +5,14 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
 } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Posts from "./pages/Posts";
@@ -52,19 +53,45 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem(AUTH_TOKEN)
-  );
+  const existingToken = localStorage.getItem(AUTH_TOKEN);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
+  // Check if the token is valid
+  let tokenIsValid = false;
+  if (existingToken) {
+    try {
+      const decodedToken = jwtDecode(existingToken);
+      const currentTime = Date.now().valueOf() / 1000;
+      if (decodedToken.exp > currentTime) {
+        tokenIsValid = true;
+      } else {
+        localStorage.removeItem(AUTH_TOKEN);
+      }
+    } catch (error) {
+      console.error("Failed to decode token", error);
+    }
+  }
+
+  const [isLoggedIn, setIsLoggedIn] = useState(tokenIsValid);
+
+  useEffect(() => {
+    console.log("isLoggedIn value: ", isLoggedIn);
+  }, [isLoggedIn]);
+
+  const handleLogin = async () => {
+    return new Promise((resolve) => {
+      const token = localStorage.getItem(AUTH_TOKEN);
+      if (token) {
+        setIsLoggedIn(true, resolve);
+      } else {
+        setIsLoggedIn(false, resolve);
+      }
+    });
   };
 
   const handleLogout = () => {
     localStorage.removeItem(AUTH_TOKEN);
     setIsLoggedIn(false);
-
-    setIsLoggedIn(false);
+    console.log("Logged out: ", isLoggedIn);
   };
 
   return (
@@ -77,7 +104,7 @@ function App() {
               path="/"
               element={
                 isLoggedIn ? (
-                  <Navigate to="/profile" />
+                  <Navigate to="/profile" replace />
                 ) : (
                   <Login onLogin={handleLogin} />
                 )

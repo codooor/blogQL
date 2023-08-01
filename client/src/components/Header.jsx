@@ -1,9 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { AUTH_TOKEN } from "../utils/constants";
 
-export default function Header() {
+export default function Header({ isLoggedIn, handleLogout }) {
   const navigate = useNavigate();
-  const authToken = localStorage.getItem(AUTH_TOKEN);
 
   return (
     <>
@@ -38,13 +36,13 @@ export default function Header() {
                   Posts
                 </Link>
               </li>
-              {authToken ? (
+              {isLoggedIn ? (
                 <li className="nav-item">
                   <a
                     className="nav-link"
                     href="/"
                     onClick={() => {
-                      localStorage.removeItem(AUTH_TOKEN);
+                      handleLogout();
                       navigate("/");
                     }}
                   >

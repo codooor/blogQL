@@ -22,7 +22,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Middleware for checking JWT
-app.post((req, res, next) => {
+app.use((req, res, next) => {
+  const path = req.path;
+
+  // Skip JWT verification for login and any other routes that don't require authentication
+  const publicPaths = ["/login"]; // Add any other public paths here
+  if (publicPaths.includes(path)) {
+    return next();
+  }
+
+  // JWT verification code
   const authHeader = req.headers.authorization;
 
   if (authHeader) {
@@ -41,29 +50,16 @@ app.post((req, res, next) => {
         }
       });
     }
+  } else {
+    next();
   }
 });
 
 //create instance of ApolloServer
 const server = new ApolloServer({
   schema,
-  context: ({ req }) => {
-    const authHeader = req.headers.authorization;
-    let user = {};
-
-    if (authHeader) {
-      const token = authHeader.split("Bearer ")[1]; // extract token from header
-
-      if (token) {
-        try {
-          const payload = verify(token, process.env.SECRET);
-          user = { username: payload.sub, role: payload.role };
-        } catch (error) {
-          console.error("Failed to verify token", error);
-        }
-      }
-    }
-    return { user };
+  context: ({ res }) => {
+    return { user: res.locals.user || {} };
   },
 });
 
