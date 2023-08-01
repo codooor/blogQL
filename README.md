@@ -9,8 +9,8 @@
 - ~~TOKEN not created storing with onClick. Successful on the backend~~
 - ~~When admin is logged in succesfully CRUD operations are still locked~~
 - ~~token is created but the signing is not working properly~~
-- logout functionality **UNUSABLE**
-- entire login function is **UNUSABLE**
+- ~~logout functionality **UNUSABLE**~~
+- ~~entire login function is **UNUSABLE**~~
 
  
 
@@ -18,6 +18,8 @@
 ---
 - Decide trade-off between HttpOnly cookies and localStorage before deployment (need refactoring if HttpOnly )
 - learning not to verify express and apollo/server together
+- as easy as a logout seemed it fought a good battle
+    - it seems as though a logout button is not necessary as this does not need to return server side to remove a token 
 
 
 
