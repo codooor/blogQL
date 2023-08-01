@@ -27,7 +27,7 @@
 #### **FUTURE FEATURE TODOS**
 ---
 - [x] create login for admin role
-- [x] logout button ( rendered unnecessary )
+- [x] ~~logout button ( rendered unnecessary )~~
 - [x] move posting features (add, delete, edit ) to /profile page
 - [ ] when admin creates, deletes, edits post -- render to the /posts page
 - [ ] create some sort of landing page ( I think ) 
