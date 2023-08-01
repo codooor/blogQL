@@ -11,6 +11,7 @@
 - ~~token is created but the signing is not working properly~~
 - ~~logout functionality **UNUSABLE**~~
 - ~~entire login function is **UNUSABLE**~~
+- receiving a 400 status for post creation in profile page
 
  
 
